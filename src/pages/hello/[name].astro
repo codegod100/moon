@@ -1,0 +1,47 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro'
+import Counter from '../../components/Counter';
+const state = {name: Astro.params.name as string}
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name");
+    // Do something with the data
+    console.log("got name",name)
+    state.name = name as string
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+
+---
+<Layout>
+    
+    
+    <div>Hello friend  {state.name}</div>
+    <form method="POST"  class="mt-4">
+        <label for="name" class="block text-sm font-medium text-gray-700">What's your name?</label>
+        <div class="mt-1">
+            <input 
+                type="text" 
+                name="name" 
+                id="name"
+                class="block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" 
+                placeholder="Enter your name"
+            />
+        </div>
+        <div class="mt-2">
+            <button
+                type="submit" 
+                class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-800 font-medium shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
+            >
+                Go
+            </button>
+        </div>
+    </form>
+    <div class="mt-10">Move away</div>
+    <div><Counter state={state} client:load/></div>
+</Layout>

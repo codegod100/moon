@@ -1,6 +1,7 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
-import moment from "moment";
 import { XRPC, CredentialManager } from "@atcute/client";
 const manager = new CredentialManager({
     service: "https://amanita.us-east.host.bsky.network",
@@ -12,32 +13,14 @@ const { data } = await rpc.get("com.atproto.repo.listRecords", {
         repo: "nandi.dads.lol",
     },
 });
-import { marked } from "marked";
-import { createSlug } from "../../lib";
-console.log({ data });
+import Article from "../../components/Article.astro";
+// console.log({ data });
+const records = data.records.map((record) => record.value);
 ---
 
 <Layout>
     <h1 class="text-2xl font-bold mb-4">Nandi's ATproto Blog</h1>
     <div>
-        {
-            data.records.map((record) => (
-                <div
-                    key={record.value.cid}
-                    class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg"
-                >
-                    <div class="font-bold underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300 cursor-pointer">
-                        <a href={"/blog/" + createSlug(record.value.title)}>
-                            {record.value.title.charAt(0).toUpperCase() +
-                                record.value.title.slice(1)}
-                        </a>
-                    </div>
-                    <div class="mb-5">
-                        {moment(record.value.createdAt).fromNow()}
-                    </div>
-                    <div set:html={marked(record.value.content)} />
-                </div>
-            ))
-        }
+        {records.map((record) => <Article record={record} />)}
     </div>
 </Layout>

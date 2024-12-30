@@ -1,0 +1,38 @@
+---
+const { record } = Astro.props;
+import moment from "moment";
+import { marked } from "marked";
+import { createSlug } from "../lib";
+
+function parseTags(input: string) {
+    const tags = input.match(/#\w+/g) || [];
+    const replaced = input.replace(/#\w+/g, (tag) => {
+        const url = `https://bsky.app/hashtag/${tag.slice(1)}`;
+        return `<a href="${url}" class="text-blue-500 hover:text-blue-700 transition-colors duration-300">${tag}</a>`;
+    });
+    return replaced;
+}
+
+function replaceLinks(input: string) {
+    const replaced = input.replace(
+        /<a([^>]+)>(.*?)<\/a>/g,
+        (match, attributes, text) =>
+            `<a ${attributes} class="text-blue-500 hover:text-blue-700 transition-colors duration-300">${text}</a>`,
+    );
+    return replaced;
+}
+---
+
+<div key={record.cid} class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+    <div
+        class="font-bold underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300 cursor-pointer"
+    >
+        <a href={"/blog/" + createSlug(record.title)}>
+            {record.title.charAt(0).toUpperCase() + record.title.slice(1)}
+        </a>
+    </div>
+    <div class="mb-5">
+        {moment(record.createdAt).fromNow()}
+    </div>
+    <div set:html={replaceLinks(marked(parseTags(record.content)))} />
+</div>

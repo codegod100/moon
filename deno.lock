@@ -21,7 +21,8 @@
     "npm:moment@^2.30.1": "2.30.1",
     "npm:nanostores@~0.11.3": "0.11.3",
     "npm:preact@^10.25.4": "10.25.4",
-    "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.4.49"
+    "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.4.49",
+    "npm:zod@^3.24.1": "3.24.1"
   },
   "jsr": {
     "@std/cli@1.0.8": {
@@ -3103,7 +3104,8 @@
         "npm:moment@^2.30.1",
         "npm:nanostores@~0.11.3",
         "npm:preact@^10.25.4",
-        "npm:tailwindcss@^3.4.17"
+        "npm:tailwindcss@^3.4.17",
+        "npm:zod@^3.24.1"
       ]
     }
   }

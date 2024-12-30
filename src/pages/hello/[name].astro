@@ -1,18 +1,12 @@
 ---
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
-import Counter from "../../components/Counter";
-const command = new Deno.Command("echo", {
-  args: [Deno.env.get("SHELL") || "/bin/sh"],
-});
 
 // create subprocess and collect output
-const { code, stdout, stderr } = await command.output();
 const state = { name: Astro.params.name as string, meta: import.meta.url };
 ---
 
 <Layout>
-  <div>{code} {stdout} {stderr}</div>
   <div>Hello <span id="name">{state.name}</span></div>
   <form class="mt-4">
     <label
@@ -52,21 +46,17 @@ const state = { name: Astro.params.name as string, meta: import.meta.url };
     console.log("got name", name);
     const messageDiv = document.getElementById("message")!;
     if (name === "twerk") {
-      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const context = new window.AudioContext();
       const oscillator = context.createOscillator();
       oscillator.type = "sine";
       oscillator.frequency.setValueAtTime(440, context.currentTime); // A4 note
       oscillator.connect(context.destination);
       oscillator.start();
       oscillator.stop(context.currentTime + 0.5); // Beep for 0.5 seconds
-      // setTimeout(() => {
-      //   alert("No twerking allowed");
-      // }, 500);
       messageDiv.textContent = "No twerking allowed";
       messageDiv.classList.remove("hidden");
-      // return;
     } else {
-      location.assign(`/hello/${name}`);
+      location.assign(`/hello/${name}`); // maybe?
       messageDiv.classList.add("hidden");
       nameVar.textContent = name;
     }

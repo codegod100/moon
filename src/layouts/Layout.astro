@@ -1,4 +1,9 @@
-<!doctype html>
+---
+import { marked } from "marked";
+let { record } = Astro.props as { record: { title: string; content: string } };
+record = record || { title: "Nandi's ATproto Blog", content: "" };
+---
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -6,7 +11,18 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro power 🚀</title>
+
+		<meta property="og:title" content={record.title} />
+		<meta
+			property="og:description"
+			content={marked(record.content) as string}
+		/>
+		<meta
+			property="og:image"
+			content="https://cdn.bsky.app/img/avatar/plain/did:plc:ngokl2gnmpbvuvrfckja3g7p/bafkreibpne7cdc42h3ueamxxvv2bk57etg7my655awtlbbde453cbj72me@jpeg"
+		/>
 	</head>
+
 	<body
 		class="container p-2 dark:bg-gray-900 dark:text-white transition-colors duration-300"
 	>

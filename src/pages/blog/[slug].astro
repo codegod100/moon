@@ -67,12 +67,10 @@ import Article from "../../components/Article.astro";
 ---
 
 <Layout>
-    <h1 class="text-2xl font-bold mb-4">Nandi's ATproto Blog</h1>
-    <Article record={record} />
-    <a
-        href="/blog"
-        class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"
-    >
-        Blog
-    </a>
+    <h1 class="text-2xl font-bold mb-4">
+        <a href="/blog">Nandi's ATproto Blog</a>
+    </h1>
+    <div class="mx-auto max-w-2xl">
+        <Article record={record} />
+    </div>
 </Layout>

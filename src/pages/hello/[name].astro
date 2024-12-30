@@ -1,39 +1,38 @@
 ---
 export const prerender = false;
-import Layout from '../../layouts/Layout.astro'
-import Counter from '../../components/Counter';
-const state = {name: Astro.params.name as string}
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = data.get("name");
-    // Do something with the data
-    console.log("got name",name)
-    state.name = name as string
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
+import Layout from "../../layouts/Layout.astro";
+import Counter from "../../components/Counter";
+const command = new Deno.Command("echo", {
+  args: [Deno.env.get("SHELL") || "/bin/sh"],
+});
 
+// create subprocess and collect output
+const { code, stdout, stderr } = await command.output();
+const state = { name: Astro.params.name as string, meta: import.meta.url };
 ---
+
 <Layout>
-    
-    
-    <div>Hello friend  {state.name}</div>
-    <form method="POST"  class="mt-4">
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-400">What's your name?</label>
-        <div class="mt-1">
-            <input 
-                type="text" 
-                name="name" 
-                id="name"
-                class="block w-1/2 rounded-md border-2 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 bg-gray-800 dark:bg-gray-900" 
-                placeholder="Enter your name"
-            />
-        </div>
-        <!-- <div class="mt-2">
+  <div>{code} {stdout} {stderr}</div>
+  <div>Hello <span id="name">{state.name}</span></div>
+  <form class="mt-4">
+    <label
+      for="name"
+      class="block mb-4 text-sm font-medium text-gray-700 dark:text-gray-400"
+    >
+      <span>What's your <span class="font-bold">new</span> name?</span>
+    </label>
+
+    <div class="mt-1">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        class="block w-1/2 rounded-md border-2 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 bg-gray-800 dark:bg-gray-900"
+        placeholder="Enter your name"
+      />
+    </div>
+    <div id="message" class="hidden mt-2 text-sm text-red-500"></div>
+    <!-- <div class="mt-2">
             <button
                 type="submit" 
                 class="px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg text-gray-800 dark:text-gray-200 font-medium shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-600"
@@ -41,7 +40,35 @@ if (Astro.request.method === "POST") {
                 Go
             </button>
         </div> -->
-    </form>
-    <div class="mt-10">Move away</div>
-    <div><Counter state={state} client:load/></div>
+  </form>
 </Layout>
+
+<script>
+  const nameVar = document.getElementById("name")!;
+  document.querySelector("form")!.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    const name = formData.get("name") as string;
+    console.log("got name", name);
+    const messageDiv = document.getElementById("message")!;
+    if (name === "twerk") {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = context.createOscillator();
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(440, context.currentTime); // A4 note
+      oscillator.connect(context.destination);
+      oscillator.start();
+      oscillator.stop(context.currentTime + 0.5); // Beep for 0.5 seconds
+      // setTimeout(() => {
+      //   alert("No twerking allowed");
+      // }, 500);
+      messageDiv.textContent = "No twerking allowed";
+      messageDiv.classList.remove("hidden");
+      // return;
+    } else {
+      messageDiv.classList.add("hidden");
+      nameVar.textContent = name;
+    }
+    (event.target as HTMLFormElement).reset();
+  });
+</script>

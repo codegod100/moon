@@ -1,11 +1,13 @@
 ---
-import { Code } from 'astro:components';
-import Layout from '../layouts/Layout.astro';
+import { Code } from "astro:components";
+import Layout from "../layouts/Layout.astro";
 ---
+
 <Layout>
-    <h1 class="text-2xl font-bold mb-4">cool code example</h1>
-    
-    <Code code={`// A cool example of using JavaScript generators
+  <h1 class="text-2xl font-bold mb-4">cool code example</h1>
+
+  <Code
+    code={`// A cool example of using JavaScript generators
 function* fibonacci() {
   let prev = 0, curr = 1;
   while (true) {
@@ -17,16 +19,37 @@ function* fibonacci() {
 // Create a generator and get first 10 Fibonacci numbers
 const fib = fibonacci();
 const first10 = Array.from({ length: 10 }, () => fib.next().value);
-console.log(first10); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`} lang="js" theme="dark-plus" />
+console.log(first10); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`}
+    lang="js"
+    theme="dark-plus"
+  />
 
-<h1 class="mt-10 text-2xl font-bold mb-4">now some haskell</h1>
-<Code code={`fibonacci :: Int -> Int
+  <h1 class="mt-10 text-2xl font-bold mb-4">now some haskell</h1>
+  <Code
+    code={`fibonacci :: Int -> Int
 fibonacci n = fibs !! n
   where
     fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
 -- Example usage
 main :: IO ()
-main = print $ fibonacci 10`} lang="haskell" theme="dark-plus" />
+main = print $ fibonacci 10`}
+    lang="haskell"
+    theme="dark-plus"
+  />
 
+  <div class="mt-5">
+    <a href="/hello/dude" class="text-blue-500 hover:text-blue-700 underline"
+      >Next page</a
+    >
+  </div>
 </Layout>
+
+<script>
+  const waveButton = document.getElementById("wave") as HTMLButtonElement;
+  waveButton.addEventListener("click", () => {
+    const name = prompt("What's your name?");
+    console.log(`Hello, ${name}!`);
+  });
+  console.log("%c this is only clientside", "color: green");
+</script>

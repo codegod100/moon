@@ -1,5 +1,4 @@
 ---
-import { marked } from "marked";
 let { record } = Astro.props as { record: { title: string; content: string } };
 record = record || { title: "Nandi's ATproto Blog", content: "" };
 ---
@@ -13,10 +12,7 @@ record = record || { title: "Nandi's ATproto Blog", content: "" };
 		<title>Astro power 🚀</title>
 
 		<meta property="og:title" content={record.title} />
-		<meta
-			property="og:description"
-			content={marked(record.content) as string}
-		/>
+		<meta property="og:description" content={record.content as string} />
 		<meta
 			property="og:image"
 			content="https://cdn.bsky.app/img/avatar/plain/did:plc:ngokl2gnmpbvuvrfckja3g7p/bafkreibpne7cdc42h3ueamxxvv2bk57etg7my655awtlbbde453cbj72me@jpeg"

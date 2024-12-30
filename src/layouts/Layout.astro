@@ -5,10 +5,22 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Astro power 🚀</title>
 	</head>
-	<body class="container p-2 dark:bg-gray-900 dark:text-white transition-colors duration-300">
+	<body
+		class="container p-2 dark:bg-gray-900 dark:text-white transition-colors duration-300"
+	>
 		<slot />
+		{
+			Astro.url.pathname !== "/" && (
+				<a
+					class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"
+					href="/"
+				>
+					Home
+				</a>
+			)
+		}
 	</body>
 </html>
 

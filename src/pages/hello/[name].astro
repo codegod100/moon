@@ -66,6 +66,7 @@ const state = { name: Astro.params.name as string, meta: import.meta.url };
       messageDiv.classList.remove("hidden");
       // return;
     } else {
+      location.assign(`/hello/${name}`);
       messageDiv.classList.add("hidden");
       nameVar.textContent = name;
     }

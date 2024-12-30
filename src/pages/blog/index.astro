@@ -13,6 +13,7 @@ const { data } = await rpc.get("com.atproto.repo.listRecords", {
     },
 });
 import { marked } from "marked";
+import { createSlug } from "../../lib";
 console.log({ data });
 ---
 
@@ -26,7 +27,7 @@ console.log({ data });
                     class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg"
                 >
                     <div class="font-bold underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300 cursor-pointer">
-                        <a href={"/blog/" + record.uri.split("/").slice(-1)}>
+                        <a href={"/blog/" + createSlug(record.value.title)}>
                             {record.value.title.charAt(0).toUpperCase() +
                                 record.value.title.slice(1)}
                         </a>

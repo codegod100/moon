@@ -9,28 +9,43 @@ const manager = new CredentialManager({
     service: "https://amanita.us-east.host.bsky.network",
 });
 const rpc = new XRPC({ handler: manager });
-const { data } = await rpc.get("com.atproto.repo.getRecord", {
+// const { data } = await rpc.get("com.atproto.repo.getRecord", {
+//     params: {
+//         collection: "com.whtwnd.blog.entry",
+//         repo: "nandi.dads.lol",
+//         rkey: Astro.params.rkey,
+//     },
+// });
+import { marked } from "marked";
+import { createSlug } from "../../lib";
+const { data } = await rpc.get("com.atproto.repo.listRecords", {
     params: {
         collection: "com.whtwnd.blog.entry",
         repo: "nandi.dads.lol",
-        rkey: Astro.params.rkey,
     },
 });
-import { marked } from "marked";
+
+const record = data.records.find((record) => {
+    const slug = createSlug(record.value.title);
+    if (slug === Astro.params.slug) {
+        return record;
+    }
+});
 ---
 
 <Layout>
+    <h1 class="text-2xl font-bold mb-4">Nandi's ATproto Blog</h1>
     <div
-        key={data.value.cid}
+        key={record.value.cid}
         class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg"
     >
         <div class="font-bold">
-            {data.value.title}
+            {record.value.title}
         </div>
         <div class="mb-5">
-            {moment(data.value.createdAt).fromNow()}
+            {moment(record.value.createdAt).fromNow()}
         </div>
-        <div set:html={marked(data.value.content)} />
+        <div set:html={marked(record.value.content)} />
         <a
             href="/blog"
             class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"

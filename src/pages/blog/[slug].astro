@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-export const prerender = false;
+// export const prerender = false;
 
 import moment from "moment";
 import { XRPC, CredentialManager } from "@atcute/client";
@@ -25,27 +25,47 @@ const { data } = await rpc.get("com.atproto.repo.listRecords", {
     },
 });
 
-const record = data.records.find((record) => {
+const slugs = data.records.map((record) => {
     const slug = createSlug(record.value.title);
-    if (slug === Astro.params.slug) {
-        return record;
-    }
+    const { title, createdAt, content } = record.value;
+    const cid = record.cid;
+    return { params: { slug, cid, title, createdAt, content } };
 });
+export function getStaticPaths() {
+    return slugs;
+}
+// const record = data.records.find((record) => {
+//     const slug = createSlug(record.value.title);
+//     if (slug === Astro.params.slug) {
+//         return record;
+//     }
+// });
+
+const record = slugs
+    .filter((record) => {
+        if (record.params.slug === Astro.params.slug) {
+            return true;
+        }
+    })
+    .map((record) => {
+        return record.params;
+    })[0];
+console.log({ record });
 ---
 
 <Layout>
     <h1 class="text-2xl font-bold mb-4">Nandi's ATproto Blog</h1>
     <div
-        key={record.value.cid}
+        key={record.cid}
         class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg"
     >
         <div class="font-bold">
-            {record.value.title}
+            {record.title}
         </div>
         <div class="mb-5">
-            {moment(record.value.createdAt).fromNow()}
+            {moment(record.createdAt).fromNow()}
         </div>
-        <div set:html={marked(record.value.content)} />
+        <div set:html={marked(record.content)} />
         <a
             href="/blog"
             class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"

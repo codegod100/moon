@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = false;
+
+import moment from "moment";
+import { XRPC, CredentialManager } from "@atcute/client";
+const manager = new CredentialManager({
+    service: "https://amanita.us-east.host.bsky.network",
+});
+const rpc = new XRPC({ handler: manager });
+const { data } = await rpc.get("com.atproto.repo.getRecord", {
+    params: {
+        collection: "com.whtwnd.blog.entry",
+        repo: "nandi.dads.lol",
+        rkey: Astro.params.rkey,
+    },
+});
+---
+
+<Layout>
+    <div
+        key={data.value.cid}
+        class="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg"
+    >
+        <div class="font-bold">
+            {data.value.title}
+        </div>
+        <div class="mb-5">
+            {moment(data.value.createdAt).fromNow()}
+        </div>
+        <div>{data.value.content}</div>
+        <a
+            href="/blog"
+            class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"
+        >
+            Blog
+        </a>
+    </div>
+</Layout>

@@ -13,9 +13,12 @@
     "jsr:@std/streams@^1.0.8": "1.0.8",
     "npm:@astrojs/preact@^4.0.1": "4.0.1_preact@10.25.4",
     "npm:@astrojs/tailwind@^5.1.4": "5.1.4_astro@5.1.1__vite@6.0.6__zod@3.24.1_tailwindcss@3.4.17__postcss@8.4.49_postcss@8.4.49",
+    "npm:@atcute/client@^2.0.6": "2.0.6",
     "npm:@deno/astro-adapter@0.2": "0.2.0_astro@5.1.1__vite@6.0.6__zod@3.24.1",
     "npm:@nanostores/preact@~0.5.2": "0.5.2_nanostores@0.11.3_preact@10.25.4",
     "npm:astro@^5.1.1": "5.1.1_vite@6.0.6_zod@3.24.1",
+    "npm:marked@^15.0.4": "15.0.4",
+    "npm:moment@^2.30.1": "2.30.1",
     "npm:nanostores@~0.11.3": "0.11.3",
     "npm:preact@^10.25.4": "10.25.4",
     "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.4.49"
@@ -140,6 +143,9 @@
         "is-wsl",
         "which-pm-runs"
       ]
+    },
+    "@atcute/client@2.0.6": {
+      "integrity": "sha512-mhdqEicGUx0s5HTFOLpz91rcLS9j/g63de0nmAqv7blhU3j+xBf4le54qr2YIXNfnReZI7EwLYLX/YIBez4LGA=="
     },
     "@babel/code-frame@7.26.2": {
       "integrity": "sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==",
@@ -1777,6 +1783,9 @@
     "markdown-table@3.0.4": {
       "integrity": "sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw=="
     },
+    "marked@15.0.4": {
+      "integrity": "sha512-TCHvDqmb3ZJ4PWG7VEGVgtefA5/euFmsIhxtD0XsBxI39gUSKL81mIRFdt0AiNQozUahd4ke98ZdirExd/vSEw=="
+    },
     "mdast-util-definitions@6.0.0": {
       "integrity": "sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==",
       "dependencies": [
@@ -2173,6 +2182,9 @@
     },
     "minipass@7.1.2": {
       "integrity": "sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw=="
+    },
+    "moment@2.30.1": {
+      "integrity": "sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how=="
     },
     "mrmime@2.0.0": {
       "integrity": "sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw=="
@@ -3083,9 +3095,12 @@
       "dependencies": [
         "npm:@astrojs/preact@^4.0.1",
         "npm:@astrojs/tailwind@^5.1.4",
+        "npm:@atcute/client@^2.0.6",
         "npm:@deno/astro-adapter@0.2",
         "npm:@nanostores/preact@~0.5.2",
         "npm:astro@^5.1.1",
+        "npm:marked@^15.0.4",
+        "npm:moment@^2.30.1",
         "npm:nanostores@~0.11.3",
         "npm:preact@^10.25.4",
         "npm:tailwindcss@^3.4.17"

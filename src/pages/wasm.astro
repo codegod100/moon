@@ -1,8 +1,12 @@
 ---
-import WasmComp from "../components/WasmComp"
-import Layout from "../layouts/Layout.astro"
+import WasmComp from "../components/WasmComp";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-    <WasmComp  client:load/>
+  Before Islands
+  <WasmComp client:only><div slot="fallback">Loading...</div></WasmComp>
+  Middle of islands
+  <WasmComp client:only><div slot="fallback">Loading...</div></WasmComp>
+  After Islands
 </Layout>

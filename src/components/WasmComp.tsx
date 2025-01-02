@@ -1,6 +1,16 @@
-import init from "../../sauron/pkg/counter.js";
+import init, { mount_component } from "../../sauron/pkg/counter.js";
+import { ulid } from "@std/ulid";
+import { useEffect } from "preact/hooks";
+const id = `id-${ulid()}`;
 await init().catch(console.error);
 
-export default function(){
-    return <><button class="hidden inline-block px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors shadow-md"/></>
+export default function () {
+  useEffect(() => {
+    mount_component(`#${id}`);
+  });
+  return (
+    <>
+      <div id={id}></div>
+    </>
+  );
 }

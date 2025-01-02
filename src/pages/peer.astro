@@ -1,0 +1,46 @@
+<script type="module" src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"
+></script>
+<script type="module">
+  const peer = new Peer({
+    config: {
+      iceServers: [{ url: "stun:stun.l.google.com:19302" }],
+    } /* Sample servers, please use appropriate ones */,
+  });
+  const peer2 = new Peer({
+    config: {
+      iceServers: [{ url: "stun:stun.l.google.com:19302" }],
+    } /* Sample servers, please use appropriate ones */,
+  });
+
+  peer.on("open", (id) => {
+    console.log("peer1");
+    console.log({ id });
+    const conn2 = peer2.connect(id);
+    conn2.on("open", () => {
+      console.log("connection open 2");
+      conn2.send("hi!");
+    });
+    conn2.on("data", (data) => {
+      console.log(data);
+    });
+  });
+  peer.on("data", (data) => {
+    console.log(data);
+  });
+
+  peer2.on("open", (id) => {
+    console.log("peer2");
+    console.log({ id });
+    const conn = peer.connect(id);
+    conn.on("open", () => {
+      console.log("connection open 1");
+      conn.send("hi!");
+    });
+    conn.on("data", (data) => {
+      console.log(data);
+    });
+  });
+  peer2.on("data", (data) => {
+    console.log(data);
+  });
+</script>

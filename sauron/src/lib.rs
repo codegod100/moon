@@ -14,8 +14,7 @@ use serde::Deserialize;
 
 #[derive(Deserialize, Debug, PartialEq, Clone, Default)]
 pub struct Data {
-  title: String,
-  body: String,
+  url: String,
 }
 enum Msg {
   Increment,
@@ -29,7 +28,7 @@ enum Msg {
 
 struct App {
   count: i32,
-  title: String,
+  url: String,
 }
 
 #[cfg(feature = "wasm")]
@@ -37,7 +36,7 @@ impl App {
   fn new() -> Self {
     App {
       count: 0,
-      title: "fetch data".to_string(),
+      url: "".to_string(),
     }
   }
 }
@@ -65,16 +64,16 @@ pub async fn sleep(millis: u32) {
 }
 
 fn fetch_data() -> Cmd<Msg> {
-  let url = "https://jsonplaceholder.typicode.com/posts/1";
+  let url = "https://api.thecatapi.com/v1/images/search";
   Cmd::new(async move {
     log::info!("fetching data from: {}", url);
     let msg = match Http::fetch_text(&url).await {
-      Ok(v) => match serde_json::from_str(&v) {
+      Ok(v) => match serde_json::from_str::<Vec<Data>>(&v) {
         Ok(data1) => {
           log::info!("data1: {:?}", data1);
-          sleep(100).await;
+          // sleep(10).await;
 
-          Msg::ReceivedData(data1)
+          Msg::ReceivedData(data1.into_iter().next().unwrap_or_default())
         }
         Err(err) => {
           log::error!("error: {:?}", err);
@@ -114,7 +113,11 @@ impl Application for App {
 
         <button class="count ml-2 mr-2" on_click=|_|{
           Msg::FetchData}>
-          {text(self.title.clone())}
+            {if self.url.is_empty() {
+              node! { <span>{text("load image")}</span> }
+            } else {
+              node! { <img src={self.url.clone()} class="max-w-60"/> }
+            }}
         </button>
         <input type="button"
             class="inline-block px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md"
@@ -138,7 +141,7 @@ impl Application for App {
       }
       Msg::ReceivedData(data) => {
         log::info!("received data: {:?}", data);
-        self.title = data.title.clone();
+        self.url = data.url.clone();
       }
 
       _ => {}

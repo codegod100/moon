@@ -13,6 +13,8 @@ console_error_panic_hook = { version = "0.1", optional = true }
 console_log = { version = "0.2", features = ["color"], optional = true }
 log = "0.4.22"
 sauron = "0.61.0"
+serde = { version = "1.0.217", features = ["serde_derive"] }
+serde_json = "1.0.134"
 
 
 [features]

@@ -28,8 +28,16 @@ jobs:
         with:
           node-version: lts/*
 
+      - uses: jetli/wasm-pack-action@v0.4.0
+        with:
+          # Optional version of wasm-pack to install(eg. 'v0.9.1', 'latest')
+          version: 'latest'
+
       - name: Install step
         run: "npm install"
+
+      - name: sauron build step
+        run: "npm run sauron-build"      
 
       - name: Build step
         run: "npm run build"

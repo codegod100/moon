@@ -1,12 +1,13 @@
 ---
+import Spinner from "../components/Spinner.astro";
 import WasmComp from "../components/WasmComp";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
   Before Islands
-  <WasmComp client:only><div slot="fallback">Loading...</div></WasmComp>
+  <WasmComp client:only><Spinner slot="fallback" /></WasmComp>
   Middle of islands
-  <WasmComp client:only><div slot="fallback">Loading...</div></WasmComp>
+  <WasmComp client:only><Spinner slot="fallback" /></WasmComp>
   After Islands
 </Layout>

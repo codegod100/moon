@@ -8,7 +8,8 @@
     "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
     "astro": "astro",
     "wasmbuild": "deno run -A jsr:@deno/wasmbuild",
-    "sauron": "cd sauron && cargo watch -s 'wasm-pack build --target web'"
+    "sauron-watch": "cd sauron && cargo watch -s 'wasm-pack build --target web'",
+    "sauron-build": "cd sauron && wasm-pack build --target web"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",

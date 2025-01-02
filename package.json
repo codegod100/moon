@@ -3,10 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev|spacer",
+    "dev": "astro dev",
     "build": "astro build",
     "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
-    "astro": "astro"
+    "astro": "astro",
+     "wasmbuild": "deno run -A jsr:@deno/wasmbuild"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",

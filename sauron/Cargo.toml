@@ -7,4 +7,6 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+console_log = "1.0.0"
+log = "0.4.22"
 sauron = "0.61.0"

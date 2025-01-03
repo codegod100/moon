@@ -1,13 +1,17 @@
 ---
+import Cat from "../components/Cat";
+import Dog from "../components/Dog";
 import Spinner from "../components/Spinner.astro";
-import WasmComp from "../components/WasmComp";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
   Before Islands
-  <WasmComp client:only><Spinner slot="fallback" /></WasmComp>
+  <Cat client:only><Spinner slot="fallback" /></Cat>
   Middle of islands
-  <WasmComp client:only><Spinner slot="fallback" /></WasmComp>
+  <div class="flex">
+    <Dog client:only><Spinner slot="fallback" /></Dog>
+    <Dog client:only><Spinner slot="fallback" /></Dog>
+  </div>
   After Islands
 </Layout>

@@ -3,7 +3,7 @@ export const prerender = false;
 
 import Layout from "../../layouts/Layout.astro";
 import { XRPC, CredentialManager } from "@atcute/client";
-import MatrixComp from "../../components/Matrix.tsx";
+import MatrixComp from "../../components/react/Matrix.tsx";
 const manager = new CredentialManager({
   service: "https://amanita.us-east.host.bsky.network",
 });

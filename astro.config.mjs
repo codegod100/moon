@@ -15,7 +15,9 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    preact(),
+    preact({
+      include: ["**/preact/*"],
+    }),
     tailwind(),
     mdx(),
     elm(),

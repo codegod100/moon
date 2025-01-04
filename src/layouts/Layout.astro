@@ -4,6 +4,7 @@ let { record, bgColor } = Astro.props as {
   bgColor: string;
 };
 record = record || { title: "Nandi's ATproto Blog", content: "" };
+bgColor = bgColor || "dark:bg-gray-900";
 ---
 
 <html lang="en">
@@ -23,7 +24,7 @@ record = record || { title: "Nandi's ATproto Blog", content: "" };
   </head>
 
   <body
-    class={`container p-2 dark:bg-gray-900 ${bgColor} dark:text-white transition-colors duration-300`}
+    class={`container p-2  ${bgColor} dark:text-white transition-colors duration-300`}
   >
     <slot />
     <!-- {

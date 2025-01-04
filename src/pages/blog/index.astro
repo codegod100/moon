@@ -19,7 +19,7 @@ import Article from "../../components/Article.astro";
 const records = data.records.map((record) => record.value);
 ---
 
-<Layout>
+<Layout bgColor="dark:bg-black">
   <h1 class="text-2xl font-bold mb-4">Nandi's ATproto Blog</h1>
   <div class="mx-auto max-w-2xl break-words">
     {records.map((record) => <Article record={record} />)}

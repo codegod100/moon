@@ -1,29 +1,32 @@
 ---
-let { record } = Astro.props as { record: { title: string; content: string } };
+let { record, bgColor } = Astro.props as {
+  record: { title: string; content: string };
+  bgColor: string;
+};
 record = record || { title: "Nandi's ATproto Blog", content: "" };
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro power 🚀</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro power 🚀</title>
 
-		<meta property="og:title" content={record.title} />
-		<meta property="og:description" content={record.content as string} />
-		<meta
-			property="og:image"
-			content="https://pub-0fc7238d1c964f2da88fd308330e7c7c.r2.dev/sun.jpg"
-		/>
-	</head>
+    <meta property="og:title" content={record.title} />
+    <meta property="og:description" content={record.content as string} />
+    <meta
+      property="og:image"
+      content="https://pub-0fc7238d1c964f2da88fd308330e7c7c.r2.dev/sun.jpg"
+    />
+  </head>
 
-	<body
-		class="container p-2 dark:bg-gray-900 dark:text-white transition-colors duration-300"
-	>
-		<slot />
-		<!-- {
+  <body
+    class={`container p-2 dark:bg-gray-900 ${bgColor} dark:text-white transition-colors duration-300`}
+  >
+    <slot />
+    <!-- {
 			Astro.url.pathname !== "/" && (
 				<a
 					class="block mt-4 underline decoration-2 underline-offset-4 text-blue-500 hover:text-blue-700 transition-colors duration-300"
@@ -33,14 +36,14 @@ record = record || { title: "Nandi's ATproto Blog", content: "" };
 				</a>
 			)
 		} -->
-	</body>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

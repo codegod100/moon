@@ -2,7 +2,6 @@
 import { defineConfig } from "astro/config";
 import deno from "@deno/astro-adapter";
 import preact from "@astrojs/preact";
-import elm from "astro-integration-elm";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -20,7 +19,6 @@ export default defineConfig({
     }),
     tailwind(),
     mdx(),
-    elm(),
     svelte(),
     react({
       include: ["**/react/*"],

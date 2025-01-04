@@ -24,7 +24,6 @@
     "npm:marked@^15.0.4": "15.0.4",
     "npm:moment@^2.30.1": "2.30.1",
     "npm:nanostores@~0.11.3": "0.11.3",
-    "npm:peerjs@^1.5.4": "1.5.4",
     "npm:preact@^10.25.4": "10.25.4",
     "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.4.49",
     "npm:zod@3.23.8": "3.23.8"
@@ -707,9 +706,6 @@
         "unist-util-visit",
         "vfile"
       ]
-    },
-    "@msgpack/msgpack@2.8.0": {
-      "integrity": "sha512-h9u4u/jiIRKbq25PM+zymTyW6bhTzELvOoUd+AvYriWOAKpLGnIamaET3pnHYoI5iYphAHBI4ayx0MehR+VVPQ=="
     },
     "@nanostores/preact@0.5.2_nanostores@0.11.3_preact@10.25.4": {
       "integrity": "sha512-DZ5G0UuHTJ8NNS8I3Jd6f4RCcWIl4siYD+vaV6jQf0T6xJ3QqTSkJkYNQTZK7O+7NC/mzaLkomyLQqD+w1E0Tg==",
@@ -1555,9 +1551,6 @@
       "dependencies": [
         "@types/estree"
       ]
-    },
-    "eventemitter3@4.0.7": {
-      "integrity": "sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw=="
     },
     "eventemitter3@5.0.1": {
       "integrity": "sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA=="
@@ -2674,7 +2667,7 @@
     "p-queue@8.0.1": {
       "integrity": "sha512-NXzu9aQJTAzbBqOt2hwsR63ea7yvxJc0PwN/zobNAudYfb1B7R08SzB4TsLeSbUCuG467NhnoT0oO6w1qRO+BA==",
       "dependencies": [
-        "eventemitter3@5.0.1",
+        "eventemitter3",
         "p-timeout"
       ]
     },
@@ -2734,18 +2727,6 @@
     },
     "pathe@1.1.2": {
       "integrity": "sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ=="
-    },
-    "peerjs-js-binarypack@2.1.0": {
-      "integrity": "sha512-YIwCC+pTzp3Bi8jPI9UFKO0t0SLo6xALnHkiNt/iUFmUUZG0fEEmEyFKvjsDKweiFitzHRyhuh6NvyJZ4nNxMg=="
-    },
-    "peerjs@1.5.4": {
-      "integrity": "sha512-yFsoLMnurJKlQbx6kVSBpOp+AlNldY1JQS2BrSsHLKCZnq6t7saHleuHM5svuLNbQkUJXHLF3sKOJB1K0xulOw==",
-      "dependencies": [
-        "@msgpack/msgpack",
-        "eventemitter3@4.0.7",
-        "peerjs-js-binarypack",
-        "webrtc-adapter"
-      ]
     },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
@@ -3107,9 +3088,6 @@
       "dependencies": [
         "queue-microtask"
       ]
-    },
-    "sdp@3.2.0": {
-      "integrity": "sha512-d7wDPgDV3DDiqulJjKiV2865wKsJ34YI+NDREbm+FySq6WuKOikwyNQcm+doLAZ1O6ltdO0SeKle2xMpN3Brgw=="
     },
     "semver@6.3.1": {
       "integrity": "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="
@@ -3502,12 +3480,6 @@
     "web-namespaces@2.0.1": {
       "integrity": "sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ=="
     },
-    "webrtc-adapter@9.0.1": {
-      "integrity": "sha512-1AQO+d4ElfVSXyzNVTOewgGT/tAomwwztX/6e3totvyyzXPvXIIuUUjAmyZGbKBKbZOXauuJooZm3g6IuFuiNQ==",
-      "dependencies": [
-        "sdp"
-      ]
-    },
     "which-pm-runs@1.1.0": {
       "integrity": "sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA=="
     },
@@ -3620,6 +3592,8 @@
       "dependencies": [
         "npm:@astrojs/mdx@^4.0.3",
         "npm:@astrojs/preact@^4.0.1",
+        "npm:@astrojs/react@^4.1.2",
+        "npm:@astrojs/svelte@^7.0.3",
         "npm:@astrojs/tailwind@^5.1.4",
         "npm:@atcute/client@^2.0.6",
         "npm:@deno/astro-adapter@0.2",
@@ -3627,14 +3601,20 @@
         "npm:@jsr/findhow__zod-factory@^0.0.2",
         "npm:@jsr/std__ulid@^1.0.0-rc.4",
         "npm:@nanostores/preact@~0.5.2",
+        "npm:@preact/signals@2",
         "npm:@tailwindcss/typography@~0.5.15",
+        "npm:@types/react-dom@^19.0.2",
+        "npm:@types/react@^19.0.2",
         "npm:astro@^5.1.1",
         "npm:marked@^15.0.4",
         "npm:moment@^2.30.1",
         "npm:nanostores@~0.11.3",
-        "npm:peerjs@^1.5.4",
         "npm:preact@^10.25.4",
+        "npm:react-dom@19",
+        "npm:react@19",
+        "npm:svelte@^5.16.1",
         "npm:tailwindcss@^3.4.17",
+        "npm:typescript@^5.7.2",
         "npm:zod@3.23.8"
       ]
     }

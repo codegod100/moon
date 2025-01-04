@@ -65,6 +65,9 @@ const record = slugs
   })[0];
 
 import Article from "../../components/Article.astro";
+if (!record) {
+  return Astro.redirect("/blog");
+}
 ---
 
 <Layout bgColor="dark:bg-black" record={record}>

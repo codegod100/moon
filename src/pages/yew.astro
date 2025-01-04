@@ -1,0 +1,9 @@
+---
+import YewComp from "../components/YewComp.tsx";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <YewComp client:only="preact" />
+  <div>what</div>
+</Layout>

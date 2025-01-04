@@ -62,13 +62,12 @@ fn fetch_cat() -> Cmd<Msg> {
   let url = "https://api.thecatapi.com/v1/images/search";
   Cmd::new(async move {
     log::info!("fetching data from: {}", url);
-    let msg = match Http::fetch_text(&url).await {
+    match Http::fetch_text(&url).await {
       Ok(v) => match serde_json::from_str::<Vec<CatData>>(&v) {
-        Ok(data1) => {
-          log::info!("data1: {:?}", data1);
+        Ok(data) => {
+          log::info!("data: {:?}", data);
           // sleep(10).await;
-          let src = data1.into_iter().next().unwrap_or_default().url;
-          // Msg::ReceivedData(data1.into_iter().next().unwrap_or_default())
+          let src = data.into_iter().next().unwrap_or_default().url;
           Msg::Cat(src)
         }
         Err(err) => {
@@ -80,8 +79,7 @@ fn fetch_cat() -> Cmd<Msg> {
         log::error!("error: {:?}", e);
         Msg::RequestError(e)
       }
-    };
-    msg
+    }
   })
 }
 

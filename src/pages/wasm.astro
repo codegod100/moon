@@ -7,11 +7,11 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   Before Islands
-  <Cat client:only><Spinner slot="fallback" /></Cat>
+  <Cat client:only="preact"><Spinner slot="fallback" /></Cat>
   Middle of islands
   <div class="flex">
-    <Dog client:only><Spinner slot="fallback" /></Dog>
-    <Dog client:only><Spinner slot="fallback" /></Dog>
+    <Dog client:only="preact"><Spinner slot="fallback" /></Dog>
+    <Dog client:only="preact"><Spinner slot="fallback" /></Dog>
   </div>
   After Islands
 </Layout>

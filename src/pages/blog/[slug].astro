@@ -5,8 +5,9 @@ export const prerender = false;
 
 import { XRPC, CredentialManager } from "@atcute/client";
 import { createSlug } from "../../lib";
+import MatrixComp from "../../components/Matrix.tsx";
 const manager = new CredentialManager({
-    service: "https://amanita.us-east.host.bsky.network",
+  service: "https://amanita.us-east.host.bsky.network",
 });
 const rpc = new XRPC({ handler: manager });
 // const { data } = await rpc.get("com.atproto.repo.getRecord", {
@@ -20,12 +21,12 @@ const rpc = new XRPC({ handler: manager });
 import { z } from "zod";
 
 const Post = z.object({
-    cid: z.string(),
-    value: z.object({
-        title: z.string(),
-        createdAt: z.string(),
-        content: z.string(),
-    }),
+  cid: z.string(),
+  value: z.object({
+    title: z.string(),
+    createdAt: z.string(),
+    content: z.string(),
+  }),
 });
 
 type Post = z.infer<typeof Post>;
@@ -38,39 +39,40 @@ type Post = z.infer<typeof Post>;
 // });
 
 const { data } = await rpc.get("com.atproto.repo.listRecords", {
-    params: {
-        collection: "com.whtwnd.blog.entry",
-        repo: "nandi.dads.lol",
-    },
+  params: {
+    collection: "com.whtwnd.blog.entry",
+    repo: "nandi.dads.lol",
+  },
 });
 // console.log({ data });
 const slugs = data.records.map((r) => {
-    const record: Post = Post.parse(r);
-    const slug = createSlug(record.value.title);
-    const { title, createdAt, content } = record.value;
-    const cid = record.cid;
-    return { params: { slug, cid, title, createdAt, content } };
+  const record: Post = Post.parse(r);
+  const slug = createSlug(record.value.title);
+  const { title, createdAt, content } = record.value;
+  const cid = record.cid;
+  return { params: { slug, cid, title, createdAt, content } };
 });
 // console.log({ slugs });
 
 const record = slugs
-    .filter((record) => {
-        if (record.params.slug === Astro.params.slug) {
-            return true;
-        }
-    })
-    .map((record) => {
-        return record.params;
-    })[0];
+  .filter((record) => {
+    if (record.params.slug === Astro.params.slug) {
+      return true;
+    }
+  })
+  .map((record) => {
+    return record.params;
+  })[0];
 
 import Article from "../../components/Article.astro";
 ---
 
 <Layout record={record}>
-    <h1 class="text-2xl font-bold mb-4">
-        <a href="/blog">Nandi's ATproto Blog</a>
-    </h1>
-    <div class="mx-auto max-w-2xl">
-        <Article record={record} />
-    </div>
+  <h1 class="text-2xl font-bold mb-4">
+    <a href="/blog">Nandi's ATproto Blog</a>
+  </h1>
+  <div class="mx-auto max-w-2xl">
+    <Article record={record} />
+  </div>
+  <MatrixComp client:only="react" />
 </Layout>

@@ -10,8 +10,21 @@ import mdx from "@astrojs/mdx";
 
 import svelte from "@astrojs/svelte";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), tailwind(), mdx(), elm(), svelte()],
+  integrations: [
+    preact({
+      include: ["**/preact/*"],
+    }),
+    tailwind(),
+    mdx(),
+    elm(),
+    svelte(),
+    react({
+      include: ["**/react/*"],
+    }),
+  ],
   adapter: deno(),
 });

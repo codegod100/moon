@@ -29,6 +29,9 @@ importers:
       '@atcute/oauth-browser-client':
         specifier: ^1.0.9
         version: 1.0.9
+      '@atcute/tid':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@deno/astro-adapter':
         specifier: ^0.2.0
         version: 0.2.0(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -44,6 +47,9 @@ importers:
       '@preact/signals':
         specifier: ^2.0.0
         version: 2.0.0(preact@10.25.4)
+      '@std/encoding':
+        specifier: npm:@jsr/std__encoding@^1.0.6
+        version: '@jsr/std__encoding@1.0.6'
       '@std/ulid':
         specifier: npm:@jsr/std__ulid@^1.0.0-rc.4
         version: '@jsr/std__ulid@1.0.0-rc.4'
@@ -158,6 +164,9 @@ packages:
 
   '@atcute/oauth-browser-client@1.0.9':
     resolution: {integrity: sha512-7B4cBm9x/S6gtBgxPktCT6GY8GUze6XlCGUASqppU+bh6x5Z3QtfpPCg4jpd+bagzCdqpgb4VNhmCLcVqoO++g==}
+
+  '@atcute/tid@1.0.2':
+    resolution: {integrity: sha512-ahmjroNyeDPJhtuf3+HTJropaH04HmJ8fhntDu73Gpz/RkAF7+nkz6kcP2QTgfvMCgMPAJUdskAAP82GPDTY9w==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -827,6 +836,9 @@ packages:
 
   '@jsr/findhow__zod-factory@0.0.2':
     resolution: {integrity: sha512-Q5jYpvM35KcAYGL71g0oltT7VATspw7V6+OR8ASa6u6qM3oTK2F0CE8ach49UlsPJ11uPz16+TfFbJEqPGV70w==, tarball: https://npm.jsr.io/~/11/@jsr/findhow__zod-factory/0.0.2.tgz}
+
+  '@jsr/std__encoding@1.0.6':
+    resolution: {integrity: sha512-P5q1wD6O7RtZ89PaIDsQb+3NeCK2xlDEVhZT+k3gn9RNEep4StH7r50cRPK4bp2E7MU8kKc24sSsaCpj5v4i3Q==, tarball: https://npm.jsr.io/~/11/@jsr/std__encoding/1.0.6.tgz}
 
   '@jsr/std__ulid@1.0.0-rc.4':
     resolution: {integrity: sha512-dJPkGZitKk31EOSyP64SAlTXdGPlzu4CXOBIYwq+0zSeATGMjB4ZVgGjrUqUp/YZEUah6XwX1WLc9krGHqQjPw==, tarball: https://npm.jsr.io/~/11/@jsr/std__ulid/1.0.0-rc.4.tgz}
@@ -2881,6 +2893,8 @@ snapshots:
     dependencies:
       '@atcute/client': 2.0.6
 
+  '@atcute/tid@1.0.2': {}
+
   '@babel/code-frame@7.26.2':
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
@@ -3350,6 +3364,8 @@ snapshots:
       '@faker-js/faker': 8.4.1
       randexp: 0.5.3
       zod: 3.23.8
+
+  '@jsr/std__encoding@1.0.6': {}
 
   '@jsr/std__ulid@1.0.0-rc.4': {}
 

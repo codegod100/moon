@@ -7,9 +7,11 @@
     getSession,
     resolveFromIdentity,
   } from "@atcute/oauth-browser-client";
+  import ImageForm from "./ImageForm.svelte";
   configureOAuth({ metadata: meta });
 </script>
 
+<ImageForm />
 <div class="flex flex-wrap gap-4 justify-center w-full">
   {#each $cards as c}
     <div class="border flex items-center flex-col w-full lg:w-60">

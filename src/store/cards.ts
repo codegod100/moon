@@ -4,7 +4,7 @@ import {
   resolveFromIdentity,
 } from "@atcute/oauth-browser-client";
 import { XRPC } from "@atcute/client";
-
+import * as TID from "@atcute/tid";
 import { z } from "zod";
 import { atom, computed, onMount, task } from "nanostores";
 export const AtProtoImage = z.object({
@@ -76,8 +76,74 @@ async function getCards(): Promise<Card[]> {
 
   return cards;
 }
-export const cards = atom<Card[]>([]);
 
+async function UrlPreview(url: string) {
+  const resp = await fetch(
+    `https://cardyb.bsky.app/v1/extract?url=${url}`
+  ).then((r) => r.json());
+  return resp;
+}
+
+async function parseText(text: string) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+
+  const previews = [];
+  for (const part of parts) {
+    if (part.match(/^https?:\/\//)) {
+      previews.push(await UrlPreview(part));
+    }
+  }
+  return previews;
+}
+
+export async function post(text: string) {
+  const { identity } = await resolveFromIdentity(localStorage["handle"]);
+  const session = await getSession(identity.id, {
+    allowStale: true,
+  });
+  const agent = new OAuthUserAgent(session);
+  const rpc = new XRPC({ handler: agent });
+
+  let imageRecord = null;
+  if (image.get() && image.get().size !== 0) {
+    const resp = await rpc.call("com.atproto.repo.uploadBlob", {
+      data: image.get(),
+    });
+    console.log({ resp });
+    // const link = resp.data.blob.ref.$link;
+
+    imageRecord = {
+      $type: "blob",
+      ref: {
+        $link: resp.data.blob.ref.$link,
+      },
+      mimeType: resp.data.blob.mimeType,
+      size: image.get().size,
+    };
+  }
+  const links = await parseText(text);
+
+  const put = await rpc.call("com.atproto.repo.putRecord", {
+    data: {
+      repo: session.info.sub,
+      collection: "nandi.schemas.card",
+      rkey: TID.now(),
+      record: {
+        $type: "nandi.schemas.card",
+        text,
+        image: imageRecord,
+        links,
+      },
+      validate: false,
+    },
+  });
+
+  console.log({ put });
+  cards.set(await getCards());
+}
+
+export const cards = atom<Card[]>([]);
+export const image = atom<File | null>(null);
 onMount(cards, () => {
   task(async () => {
     cards.set(await getCards());

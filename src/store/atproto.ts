@@ -1,5 +1,5 @@
 import { PUBLIC_URL } from "astro:env/client";
-const publicUrl = PUBLIC_URL;
+const publicUrl = PUBLIC_URL || Deno.env.get("PUBLIC_URL");
 const url = publicUrl || `http://127.0.0.1:4321`;
 const enc = encodeURIComponent;
 

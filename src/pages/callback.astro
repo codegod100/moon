@@ -4,7 +4,7 @@
     finalizeAuthorization,
   } from "@atcute/oauth-browser-client";
   import { metadata as meta } from "../store/atproto";
-  configureOAuth({ metadata: meta });
+  configureOAuth({ metadata: await meta() });
   async function finalize(params: URLSearchParams) {
     await finalizeAuthorization(params);
     location.assign(localStorage["url"]);

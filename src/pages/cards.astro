@@ -1,8 +1,9 @@
 ---
 import CardsComp from "../components/Cards.svelte";
 import Layout from "../layouts/Layout.astro";
+import { metadata as meta } from "../store/atproto";
 ---
 
 <Layout>
-  <CardsComp client:only="svelte" />
+  <CardsComp meta={meta} client:only="svelte" />
 </Layout>

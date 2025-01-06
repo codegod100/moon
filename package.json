@@ -26,6 +26,7 @@
     "@findhow/zod-factory": "npm:@jsr/findhow__zod-factory@^0.0.2",
     "@nanostores/preact": "^0.5.2",
     "@preact/signals": "^2.0.0",
+    "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.3",
     "@std/encoding": "npm:@jsr/std__encoding@^1.0.6",
     "@std/ulid": "npm:@jsr/std__ulid@^1.0.0-rc.4",
     "@types/react": "^19.0.2",

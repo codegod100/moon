@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cards } from "../store/cards";
-  import { metadata as meta } from "../store/atproto";
+  const { meta } = $props();
   import {
     configureOAuth,
     createAuthorizationUrl,

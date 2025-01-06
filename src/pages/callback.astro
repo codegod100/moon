@@ -1,0 +1,15 @@
+<script>
+  import {
+    configureOAuth,
+    finalizeAuthorization,
+  } from "@atcute/oauth-browser-client";
+  import { metadata as meta } from "../store/atproto";
+  configureOAuth({ metadata: meta });
+  async function finalize(params: URLSearchParams) {
+    await finalizeAuthorization(params);
+    location.assign(localStorage["url"]);
+  }
+  const params = new URLSearchParams(location.hash.slice(1));
+  // location.assign(`/finalize?${params}`);
+  finalize(params);
+</script>

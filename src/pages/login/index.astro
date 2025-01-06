@@ -1,0 +1,29 @@
+<div>
+  <form>
+    <input
+      id="handle"
+      autofocus={true}
+      name="handle"
+      class="input mt-1"
+      type="text"
+      placeholder="enter handle..."
+    />
+    <div>
+      <button>login</button>
+    </div>
+  </form>
+</div>
+<script>
+  export function getFieldValue(name: string): string {
+    const field: HTMLInputElement = document.getElementById(
+      name
+    ) as HTMLInputElement;
+    return field.value;
+  }
+  document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const handle = getFieldValue("handle");
+    localStorage["handle"] = handle;
+    location.assign(`/login/${handle}`);
+  });
+</script>

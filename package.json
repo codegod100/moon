@@ -19,6 +19,7 @@
     "@astrojs/svelte": "^7.0.3",
     "@astrojs/tailwind": "^5.1.4",
     "@atcute/client": "^2.0.6",
+    "@atcute/oauth-browser-client": "^1.0.9",
     "@deno/astro-adapter": "^0.2.0",
     "@faker-js/faker": "8.4.1",
     "@findhow/zod-factory": "npm:@jsr/findhow__zod-factory@^0.0.2",

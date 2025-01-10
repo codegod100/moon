@@ -1,5 +1,3 @@
-// import { neon } from "@neondatabase/serverless";
-
 export function createSlug(input: string): string {
   return input
     .toLowerCase() // Convert to lowercase
@@ -8,8 +6,6 @@ export function createSlug(input: string): string {
     .replace(/[\s_-]+/g, "-") // Replace spaces, underscores, multiple hyphens with single hyphen
     .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
 }
-
-// export const sql = neon(import.meta.env.NEON_DATABASE_URL);
 
 export function userDivs(newusers: { username: string; id: number }[]) {
   return `

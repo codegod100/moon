@@ -2,23 +2,13 @@
     import { actions } from "astro:actions";
     import { onMount } from "svelte";
     import confetti from "canvas-confetti";
-    console.log("hi");
-    let users: ArrayLike<{ username: string; id: number }> | undefined;
-    let title: string;
-    let content: string;
-    let posts:
-        | ArrayLike<{
-              id: number;
-              title: string;
-              content: string;
-          }>
-        | undefined;
+    import { Faker, faker } from "@faker-js/faker";
+    let { users, posts } = $props();
+    let title = $state("");
+    let content = $state("");
+
     onMount(async () => {
         console.log("mounted");
-        users = await actions.getUsers().then((u) => u.data);
-        posts = await actions.getPosts().then((u) => u.data);
-        console.log({ users });
-        console.log({ posts });
     });
 </script>
 
@@ -73,7 +63,9 @@
 <button
     class="bg-blue-500 hover:bg-blue-700 text-white p-1 m-2 rounded small"
     onclick={async () => {
-        const user = await actions.insertUser({ username: "yolo" });
+        const user = await actions.insertUser({
+            username: faker.internet.userName(),
+        });
         console.log({ user });
         users = await actions.getUsers().then((u) => u.data);
         // throwConfetti();

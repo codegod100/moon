@@ -1,11 +1,12 @@
 ---
+export const prerender = false;
+import { actions } from "astro:actions";
 import CardsComp from "../components/Cards.svelte";
 import Layout from "../layouts/Layout.astro";
 import { metadata } from "../store/atproto";
-import "@std/dotenv/load";
-const meta = await metadata();
+const cards = await Astro.callAction(actions.getCards, {}).then((u) => u.data);
 ---
 
 <Layout>
-  <CardsComp meta={meta} client:only="svelte" />
+    <CardsComp cardsData={cards} meta={metadata} client:only="svelte" />
 </Layout>

@@ -1,8 +1,16 @@
 ---
+export const prerender = false;
 import Layout from "../layouts/Layout.astro";
 import UsersComp from "../components/Users.svelte";
+import { actions } from "astro:actions";
+const users = await Astro.callAction(actions.getUsers, {}).then((u) => u.data);
+const posts = await Astro.callAction(actions.getPosts, {}).then((u) => u.data);
+const agent = await Astro.callAction(actions.getAgent, {}).then((u) => u.data);
+const cards = await Astro.callAction(actions.getCards, {}).then((u) => u.data);
+console.log({ agent, cards, users, posts });
+// console.log(agent.error);
 ---
 
 <Layout>
-  <UsersComp client:load />
+    <UsersComp users={users} posts={posts} client:load />
 </Layout>

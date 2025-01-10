@@ -2,7 +2,6 @@
 export const prerender = false;
 import { metadata } from "../../store/atproto";
 import Login from "../../components/Login.svelte";
-const meta = await metadata();
 ---
 
-<Login meta={meta} client:only="svelte" />
+<Login meta={metadata} client:only="svelte" />

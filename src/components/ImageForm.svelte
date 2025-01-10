@@ -1,15 +1,17 @@
 <script lang="ts">
   import { XRPC } from "@atcute/client";
+  import { actions } from "astro:actions";
+  let {value = $bindable()} = $props()
   import {
     getSession,
     OAuthUserAgent,
     resolveFromIdentity,
   } from "@atcute/oauth-browser-client";
   import { image, post } from "../store/cards";
-  let text = "";
-  let loading = false;
+  let text = $state("");
+  let loading = $state(false);
   let imageBlob: Blob;
-  let imageTag: string | null;
+  let imageTag = $state(null)
   import { encodeBase64 } from "@std/encoding";
 </script>
 
@@ -46,6 +48,7 @@
           console.log(e.target);
           loading = true;
           await post(text);
+          value = await actions.getCards().then(c=>c.data);
           text = "";
           loading = false;
           imageTag = null;

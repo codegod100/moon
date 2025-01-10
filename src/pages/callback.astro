@@ -1,16 +1,26 @@
 <script>
-  import {
-    configureOAuth,
-    finalizeAuthorization,
-  } from "@atcute/oauth-browser-client";
-  // import { metadata as meta } from "../store/atproto";
-  const metadata = await fetch("/client-metadata.json").then((r) => r.json());
-  configureOAuth({ metadata });
-  async function finalize(params: URLSearchParams) {
-    await finalizeAuthorization(params);
-    location.assign(localStorage["url"]);
-  }
-  const params = new URLSearchParams(location.hash.slice(1));
-  // location.assign(`/finalize?${params}`);
-  finalize(params);
+    import { actions } from "astro:actions";
+    import {
+        configureOAuth,
+        finalizeAuthorization,
+    } from "@atcute/oauth-browser-client";
+    // import { metadata as meta } from "../store/atproto";
+    const metadata = await fetch("/client-metadata.json").then((r) => r.json());
+    configureOAuth({ metadata });
+    async function finalize(params: URLSearchParams) {
+        await finalizeAuthorization(params);
+        await actions.storeLocal({
+            key: "atcute-oauth:sessions",
+            value: localStorage["atcute-oauth:sessions"],
+        });
+        await actions.storeLocal({
+            key: "handle",
+            value: localStorage["handle"],
+        });
+        localStorage["url"] = params.get("url");
+        if (localStorage["url"]) location.assign(localStorage["url"]);
+    }
+    const params = new URLSearchParams(location.hash.slice(1));
+    // location.assign(`/finalize?${params}`);
+    finalize(params);
 </script>

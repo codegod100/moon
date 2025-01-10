@@ -44,6 +44,7 @@ jobs:
         env:
           ASTRO_DB_REMOTE_URL: ${{ secrets.ASTRO_DB_REMOTE_URL }}
           ASTRO_DB_APP_TOKEN: ${{ secrets.ASTRO_DB_APP_TOKEN }}
+          ASTRO_STUDIO_APP_TOKEN: "wtf"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@adam/confetti':
+        specifier: npm:@jsr/adam__confetti@^2.0.0
+        version: '@jsr/adam__confetti@2.0.0'
       '@astrojs/db':
         specifier: ^0.14.5
         version: 0.14.5(@neondatabase/serverless@0.10.4)(@types/pg@8.11.6)(@types/react@19.0.2)(react@19.0.0)
@@ -71,6 +74,9 @@ importers:
       astro:
         specifier: ^5.1.1
         version: 5.1.1(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1)
+      canvas-confetti:
+        specifier: ^1.9.3
+        version: 1.9.3
       marked:
         specifier: ^15.0.4
         version: 15.0.4
@@ -105,6 +111,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.17)
+      '@types/canvas-confetti':
+        specifier: ^1.9.0
+        version: 1.9.0
 
 packages:
 
@@ -849,6 +858,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@jsr/adam__confetti@2.0.0':
+    resolution: {integrity: sha512-+2gXaLjudldLhFRgIF4cYx55mxyY6Rjv4zK253rkU9mmw7nwbTUdY50ycN83UKHwnf9pXtDWm4J+sLsWnnUWMA==, tarball: https://npm.jsr.io/~/11/@jsr/adam__confetti/2.0.0.tgz}
+
   '@jsr/findhow__zod-factory@0.0.2':
     resolution: {integrity: sha512-Q5jYpvM35KcAYGL71g0oltT7VATspw7V6+OR8ASa6u6qM3oTK2F0CE8ach49UlsPJ11uPz16+TfFbJEqPGV70w==, tarball: https://npm.jsr.io/~/11/@jsr/findhow__zod-factory/0.0.2.tgz}
 
@@ -1141,6 +1153,9 @@ packages:
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
 
+  '@types/canvas-confetti@1.9.0':
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
+
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
@@ -1332,6 +1347,9 @@ packages:
 
   caniuse-lite@1.0.30001690:
     resolution: {integrity: sha512-5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w==}
+
+  canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1966,7 +1984,6 @@ packages:
 
   libsql@0.4.7:
     resolution: {integrity: sha512-T9eIRCs6b0J1SHKYIvD8+KCJMcWZ900iZyxdnSCdqxN12Z1ijzT+jY5nrk72Jw4B0HGzms2NgpryArlJqvc3Lw==}
-    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@3.1.3:
@@ -3711,6 +3728,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@jsr/adam__confetti@2.0.0': {}
+
   '@jsr/findhow__zod-factory@0.0.2':
     dependencies:
       '@faker-js/faker': 8.4.1
@@ -4041,6 +4060,8 @@ snapshots:
     dependencies:
       '@babel/types': 7.26.3
 
+  '@types/canvas-confetti@1.9.0': {}
+
   '@types/cookie@0.6.0': {}
 
   '@types/debug@4.1.12':
@@ -4313,6 +4334,8 @@ snapshots:
   camelcase@8.0.0: {}
 
   caniuse-lite@1.0.30001690: {}
+
+  canvas-confetti@1.9.3: {}
 
   ccount@2.0.1: {}
 

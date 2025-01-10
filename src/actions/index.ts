@@ -1,12 +1,12 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { db, User, eq } from "astro:db";
+import { db, User, eq, Post } from "astro:db";
 import "@std/dotenv/load";
 export const server = {
   insertUser: defineAction({
-    username: z.string(),
-    handler: async (username: string) => {
-      const resp = await db.insert(User).values({ username });
+    input: z.object({ username: z.string() }),
+    handler: async (input) => {
+      const resp = await db.insert(User).values({ username: input.username });
       console.log({ resp });
       return JSON.stringify(resp);
     },
@@ -18,10 +18,32 @@ export const server = {
     },
   }),
   deleteUser: defineAction({
-    id: z.number(),
-    handler: async (id: number) => {
+    input: z.object({ id: z.number() }),
+    handler: async (input) => {
       console.log("delete");
-      const resp = await db.delete(User).where(eq(User.id, id));
+      const resp = await db.delete(User).where(eq(User.id, input.id));
+      return JSON.stringify(resp);
+    },
+  }),
+  createPost: defineAction({
+    input: z.object({ title: z.string(), content: z.string() }),
+    handler: async (input) => {
+      const resp = await db
+        .insert(Post)
+        .values({ title: input.title, content: input.content });
+      return JSON.stringify(resp);
+    },
+  }),
+  getPosts: defineAction({
+    handler: async () => {
+      const posts = await db.select().from(Post).all();
+      return posts;
+    },
+  }),
+  deletePost: defineAction({
+    input: z.object({ id: z.number() }),
+    handler: async (input) => {
+      const resp = await db.delete(Post).where(eq(Post.id, input.id));
       return JSON.stringify(resp);
     },
   }),

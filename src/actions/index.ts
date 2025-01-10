@@ -1,6 +1,7 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { db, User, eq } from "astro:db";
+import "@std/dotenv/load";
 export const server = {
   insertUser: defineAction({
     username: z.string(),

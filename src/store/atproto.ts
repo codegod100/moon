@@ -1,4 +1,4 @@
-import { load } from "@std/dotenv";
+import "@std/dotenv/load";
 export let CLIENT_ID: string;
 export let REDIRECT_URI: string;
 export type Metadata = {
@@ -15,7 +15,7 @@ export type Metadata = {
   dpop_bound_access_tokens: boolean;
 };
 export async function metadata() {
-  console.log(await load({ export: true }));
+  // console.log(await load({ export: true }));
   const publicUrl = Deno.env.get("PUBLIC_URL");
   const url = publicUrl || `http://127.0.0.1:4321`;
   const enc = encodeURIComponent;

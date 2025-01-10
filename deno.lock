@@ -3590,6 +3590,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@astrojs/db@~0.14.5",
         "npm:@astrojs/mdx@^4.0.3",
         "npm:@astrojs/preact@^4.0.1",
         "npm:@astrojs/react@^4.1.2",
@@ -3605,6 +3606,7 @@
         "npm:@jsr/std__encoding@^1.0.6",
         "npm:@jsr/std__ulid@^1.0.0-rc.4",
         "npm:@nanostores/preact@~0.5.2",
+        "npm:@neondatabase/serverless@~0.10.4",
         "npm:@preact/signals@2",
         "npm:@tailwindcss/typography@~0.5.15",
         "npm:@types/react-dom@^19.0.2",

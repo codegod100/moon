@@ -11,6 +11,8 @@ import svelte from "@astrojs/svelte";
 
 import react from "@astrojs/react";
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   env: {
@@ -22,16 +24,10 @@ export default defineConfig({
       }),
     },
   },
-  integrations: [
-    preact({
-      include: ["**/preact/*"],
-    }),
-    tailwind(),
-    mdx(),
-    svelte(),
-    react({
-      include: ["**/react/*"],
-    }),
-  ],
+  integrations: [preact({
+    include: ["**/preact/*"],
+  }), tailwind(), mdx(), svelte(), react({
+    include: ["**/react/*"],
+  }), db()],
   adapter: deno(),
 });

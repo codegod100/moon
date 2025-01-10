@@ -13,6 +13,7 @@
     "yew-watch": "cd yew && cargo watch -s 'wasm-pack build --target web'"
   },
   "dependencies": {
+    "@astrojs/db": "^0.14.5",
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/preact": "^4.0.1",
     "@astrojs/react": "^4.1.2",
@@ -25,6 +26,7 @@
     "@faker-js/faker": "8.4.1",
     "@findhow/zod-factory": "npm:@jsr/findhow__zod-factory@^0.0.2",
     "@nanostores/preact": "^0.5.2",
+    "@neondatabase/serverless": "^0.10.4",
     "@preact/signals": "^2.0.0",
     "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.3",
     "@std/encoding": "npm:@jsr/std__encoding@^1.0.6",

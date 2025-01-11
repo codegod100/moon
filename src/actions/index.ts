@@ -7,6 +7,7 @@ import "@std/dotenv/load";
 import { decodeBase64 } from "@std/encoding/base64";
 import {
 	generateAuthenticationOptions,
+	verifyAuthenticationResponse,
 	verifyRegistrationResponse,
 	type VerifyRegistrationResponseOpts,
 } from "@simplewebauthn/server";
@@ -36,7 +37,25 @@ export const server = {
 			});
 		},
 	}),
-
+	verifyAuthenticationResponse: defineAction({
+		handler: async ({ authentication, options }) => {
+			const passkey = await kv.get(["passkey"]).then((r) => r.value);
+			console.log({ passkey });
+			const credentialID = decodeBase64(passkey.id);
+			const credentialPublicKey = decodeBase64(passkey.publicKey);
+			return await verifyAuthenticationResponse({
+				response: authentication,
+				expectedChallenge: options.challenge,
+				expectedOrigin: `https://${options.rpId}`,
+				expectedRPID: options.rpId,
+				authenticator: {
+					credentialPublicKey,
+					credentialID,
+					counter: passkey.counter,
+				},
+			});
+		},
+	}),
 	generateRegistrationOptions: defineAction({
 		handler: async () => {
 			return options;

@@ -18,7 +18,13 @@ const authOptions = await actions.generateAuthenticationOptions().then((r) => r.
 console.log({ authOptions });
 const auth = await startAuthentication(authOptions);
 console.log({ auth });
-
+const verification = await actions
+	.verifyAuthenticationResponse({
+		authentication: auth,
+		options: authOptions,
+	})
+	.then((r) => r.data);
+console.log({ verification });
 }}>authenticate</button>
 
 <button

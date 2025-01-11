@@ -15,7 +15,7 @@ const rpName = "SimpleWebAuthn Example";
  * A unique identifier for your website. 'localhost' is okay for
  * local dev
  */
-const rpID = "buildbox.tailfe3ae2.ts.net";
+export const rpID = "buildbox.tailfe3ae2.ts.net";
 /**
  * The URL at which registrations and authentications should occur.
  * 'http://localhost' and 'http://localhost:PORT' are also valid.

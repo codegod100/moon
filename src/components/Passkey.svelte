@@ -8,32 +8,39 @@
 	});
 </script>
 
+<button id="authenticate" onclick={async () =>{
+	const passkey = await actions.getPasskey().then((r) => r.data.value);
+	console.log({ passkey });
+const authOptions = await actions.generateAuthenticationOptions().then((r) => r.data);
+console.log({ authOptions });
+
+
+}}>authenticate</button>
+
 <button
 	id="register"
 	onclick={async () => {
 		const options = await actions
 			.generateRegistrationOptions()
 			.then((r) => r.data);
-		const processed: PublicKeyCredentialCreationOptionsJSON =
-			JSON.parse(options);
-		console.log({ processed });
-		const registration = await startRegistration(processed);
+		console.log({ options });
+		const registration = await startRegistration(options);
 		console.log(registration);
 		const verification = await actions
 			.verifyRegistrationResponse({
-				registration: JSON.stringify(registration),
-				options: JSON.stringify(processed),
+				registration,
+				options,
 			})
 			.then((r) => r.data);
 		console.log({ verification });
-		const registrationInfo = JSON.parse(verification).registrationInfo;
+		const registrationInfo = verification.registrationInfo;
 		console.log({ registrationInfo });
 
 		const passkey: Passkey = {
 			id: registrationInfo.credentialID,
 			publicKey: registrationInfo.credentialPublicKey,
 			user: { username: "foo", id: 42 },
-			webauthnUserID: processed.user.id,
+			webauthnUserID: options.user.id,
 			counter: registrationInfo.counter,
 			deviceType: registrationInfo.credentialDeviceType,
 			backedUp: registrationInfo.credentialBackedUp,

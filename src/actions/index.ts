@@ -4,6 +4,7 @@ import { db, User, eq, Post } from "astro:db";
 import { options, type Passkey, rpID } from "../passkeys/registration";
 import PasskeyComp from "../components/Passkey.svelte";
 import "@std/dotenv/load";
+import { decodeBase64 } from "@std/encoding/base64";
 import {
 	generateAuthenticationOptions,
 	verifyRegistrationResponse,
@@ -25,10 +26,13 @@ export const server = {
 	}),
 	generateAuthenticationOptions: defineAction({
 		handler: async () => {
-			const passkey = await kv.get(["passkey"]);
+			const passkey = await kv.get(["passkey"]).then((r) => r.value);
+			console.log({ passkey });
+			const id = decodeBase64(passkey.id);
+			console.log({ id });
 			return await generateAuthenticationOptions({
 				rpID,
-				allowCredentials: [{ id: passkey.id, type: "public-key" }],
+				allowCredentials: [{ id, type: "public-key" }],
 			});
 		},
 	}),

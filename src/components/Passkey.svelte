@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { startRegistration } from "@simplewebauthn/browser";
+	import { startRegistration, startAuthentication } from "@simplewebauthn/browser";
 	import { onMount } from "svelte";
 	import { actions } from "astro:actions";
 	import { type Passkey } from "../passkeys/registration";
+
+
+import { encodeBase64 } from "@std/encoding/base64";
 	onMount(async () => {
 
 	});
@@ -13,7 +16,8 @@
 	console.log({ passkey });
 const authOptions = await actions.generateAuthenticationOptions().then((r) => r.data);
 console.log({ authOptions });
-
+const auth = await startAuthentication(authOptions);
+console.log({ auth });
 
 }}>authenticate</button>
 
@@ -25,7 +29,7 @@ console.log({ authOptions });
 			.then((r) => r.data);
 		console.log({ options });
 		const registration = await startRegistration(options);
-		console.log(registration);
+		console.log({registration});
 		const verification = await actions
 			.verifyRegistrationResponse({
 				registration,
@@ -36,9 +40,14 @@ console.log({ authOptions });
 		const registrationInfo = verification.registrationInfo;
 		console.log({ registrationInfo });
 
+		const id = encodeBase64(registrationInfo.credentialID)
+		console.log({ id });
+		const publicKey = encodeBase64(registrationInfo.credentialPublicKey)
+		console.log({ publicKey });
+
 		const passkey: Passkey = {
-			id: registrationInfo.credentialID,
-			publicKey: registrationInfo.credentialPublicKey,
+			id,
+			publicKey,
 			user: { username: "foo", id: 42 },
 			webauthnUserID: options.user.id,
 			counter: registrationInfo.counter,

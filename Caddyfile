@@ -1,0 +1,4 @@
+buildbox.tailfe3ae2.ts.net {
+	reverse_proxy localhost:4321
+}
+

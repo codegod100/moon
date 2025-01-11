@@ -3,13 +3,18 @@
 	import { onMount } from "svelte";
 	import { actions } from "astro:actions";
 	import { type Passkey } from "../passkeys/registration";
-
+	 import confetti from "canvas-confetti";
+let verified = $state(false)
 
 import { encodeBase64 } from "@std/encoding/base64";
 	onMount(async () => {
 
 	});
 </script>
+
+{#if verified}
+	<h1>Successfully verified</h1>
+{/if}
 
 <button id="authenticate" onclick={async () =>{
 	const passkey = await actions.getPasskey().then((r) => r.data.value);
@@ -25,6 +30,12 @@ const verification = await actions
 	})
 	.then((r) => r.data);
 console.log({ verification });
+if(verification.verified) {
+
+	verified = true
+confetti()
+}
+
 }}>authenticate</button>
 
 <button

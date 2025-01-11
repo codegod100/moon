@@ -11,9 +11,13 @@ import {
 import { metadata } from "../store/atproto";
 import "@std/dotenv/load";
 import { XRPC } from "@atcute/client";
+
 async function getAgent() {
-  configureOAuth({ metadata });
-  const { identity } = await resolveFromIdentity(localStorage["handle"]);
+  
+  
+  console.log("getting agent")
+  console.log(localStorage.get("handle"));
+  const { identity } = await resolveFromIdentity(localStorage.get("handle")!);
   const session = await getSession(identity.id, {
     allowStale: true,
   });
@@ -40,7 +44,9 @@ export const server = {
     handler: async () => {
       const agent = await getAgent();
       const rpc = new XRPC({ handler: agent });
-      const { identity } = await resolveFromIdentity(localStorage["handle"]);
+      const { identity } = await resolveFromIdentity(
+        localStorage.get("handle")!,
+      );
       const session = await getSession(identity.id, {
         allowStale: true,
       });
@@ -74,7 +80,9 @@ export const server = {
   getAgent: defineAction({
     handler: async () => {
       configureOAuth({ metadata });
-      const { identity } = await resolveFromIdentity(localStorage["handle"]);
+      const { identity } = await resolveFromIdentity(
+        localStorage.get("handle")!,
+      );
       // console.log({ identity });
       const session = await getSession(identity.id, {
         allowStale: true,
@@ -88,8 +96,9 @@ export const server = {
   storeLocal: defineAction({
     input: z.object({ key: z.string(), value: z.string() }),
     handler: async (input) => {
-      localStorage[input.key] = input.value;
-      console.log({ localStorage });
+      console.log(input.key, input.value);
+      localStorage.set(input.key, input.value);
+      console.log(localStorage.get(input.key));
       return JSON.stringify({ success: true });
     },
   }),

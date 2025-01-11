@@ -4187,6 +4187,7 @@
         "npm:@faker-js/faker@8.4.1",
         "npm:@jsr/adam__confetti@2",
         "npm:@jsr/findhow__zod-factory@^0.0.2",
+        "npm:@jsr/pipisasa__storage@^1.0.2",
         "npm:@jsr/std__dotenv@~0.225.3",
         "npm:@jsr/std__encoding@^1.0.6",
         "npm:@jsr/std__ulid@^1.0.0-rc.4",

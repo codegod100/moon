@@ -1,4 +1,5 @@
 import {
+configureOAuth,
   getSession,
   OAuthUserAgent,
   resolveFromIdentity,
@@ -29,7 +30,8 @@ export const Card = z.object({
 });
 export type Card = z.infer<typeof Card>;
 
-async function getCards(): Promise<Card[]> {
+export async function getCards(metadata): Promise<Card[]> {
+  configureOAuth({ metadata });
   const { identity } = await resolveFromIdentity(localStorage["handle"]);
   const session = await getSession(identity.id, {
     allowStale: true,
@@ -79,7 +81,7 @@ async function getCards(): Promise<Card[]> {
 
 async function UrlPreview(url: string) {
   const resp = await fetch(
-    `https://cardyb.bsky.app/v1/extract?url=${url}`
+    `https://cardyb.bsky.app/v1/extract?url=${url}`,
   ).then((r) => r.json());
   return resp;
 }
@@ -137,9 +139,6 @@ export async function post(text: string) {
       validate: false,
     },
   });
-
-  console.log({ put });
-  cards.set(await getCards());
 }
 
 export const cards = atom<Card[]>([]);

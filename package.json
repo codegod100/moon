@@ -28,6 +28,7 @@
     "@findhow/zod-factory": "npm:@jsr/findhow__zod-factory@^0.0.2",
     "@nanostores/preact": "^0.5.2",
     "@neondatabase/serverless": "^0.10.4",
+    "@pipisasa/storage": "npm:@jsr/pipisasa__storage@^1.0.2",
     "@preact/signals": "^2.0.0",
     "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.3",
     "@std/encoding": "npm:@jsr/std__encoding@^1.0.6",

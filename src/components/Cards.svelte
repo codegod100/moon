@@ -1,24 +1,19 @@
 <script lang="ts">
-    // import { cards as cardStore } from "../store/cards";
-    const { meta, cardsData } = $props();
-    let cards = $state(cardsData);
-    import {
-        configureOAuth,
-        createAuthorizationUrl,
-        getSession,
-        resolveFromIdentity,
-    } from "@atcute/oauth-browser-client";
+    import { Card, getCards } from "../store/cards";
+    import { onMount } from "svelte";
+    const { meta } = $props();
+    let cards = $state<Card[]>([]);
+    onMount(async () => {
+        cards = await getCards(meta);
+    });
     import ImageForm from "./ImageForm.svelte";
-    configureOAuth({ metadata: meta });
 </script>
 
-<ImageForm bind:value={cards} />
-<div class="flex flex-wrap gap-4 justify-center w-full">
+<ImageForm bind:value={cards} {meta} />
+<div class="columns-1 lg:columns-4 gap-4 w-full">
     {#each cards as c}
-        <div class="border flex items-center flex-col w-full lg:w-60">
-            <div
-                class="break-words break-all whitespace-pre-wrap overflow-hidden"
-            >
+        <div class="border w-full lg:w-60 break-inside-avoid mb-4">
+            <div class="">
                 {c.text}
             </div>
             <div>

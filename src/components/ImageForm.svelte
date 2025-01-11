@@ -1,17 +1,12 @@
 <script lang="ts">
-  import { XRPC } from "@atcute/client";
   import { actions } from "astro:actions";
-  let {value = $bindable()} = $props()
-  import {
-    getSession,
-    OAuthUserAgent,
-    resolveFromIdentity,
-  } from "@atcute/oauth-browser-client";
-  import { image, post } from "../store/cards";
+  import { getCards, image, post } from "../store/cards";
+  let { value = $bindable(), meta } = $props();
+
   let text = $state("");
   let loading = $state(false);
-  let imageBlob: Blob;
-  let imageTag = $state(null)
+  let imageBlob: Readonly<File> | null | Blob;
+  let imageTag: string | null = $state(null);
   import { encodeBase64 } from "@std/encoding";
 </script>
 
@@ -22,9 +17,9 @@
       method="post"
       onchange={async (e) => {
         console.log({ image });
-        const bytes = await $image.arrayBuffer();
+        const bytes = await $image!.arrayBuffer();
         imageBlob = $image;
-        imageTag = `data:${$image.type};base64,${encodeBase64(bytes)}`;
+        imageTag = `data:${$image!.type};base64,${encodeBase64(bytes)}`;
       }}
     >
       <div>
@@ -34,7 +29,7 @@
           accept="image/*"
           required
           class=""
-          onchange={(e) => ($image = e.target!.files[0])}
+          onchange={(e) => ($image = (e.target as HTMLInputElement).files![0])}
         />
       </div>
     </form>
@@ -48,7 +43,7 @@
           console.log(e.target);
           loading = true;
           await post(text);
-          value = await actions.getCards().then(c=>c.data);
+          value = await getCards(meta);
           text = "";
           loading = false;
           imageTag = null;

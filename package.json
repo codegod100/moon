@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "deno run -A --unstable-kv npm:astro dev --host --remote",
 		"build": "astro build --remote",
-		"preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
+		"preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs -- --port 4321",
 		"astro": "astro",
 		"wasmbuild": "deno run -A jsr:@deno/wasmbuild",
 		"sauron-watch": "cd sauron && cargo watch -s 'wasm-pack build --target web'",

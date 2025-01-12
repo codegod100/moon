@@ -14,6 +14,7 @@ jobs:
       ASTRO_DB_REMOTE_URL: ${{ secrets.ASTRO_DB_REMOTE_URL }}
       ASTRO_DB_APP_TOKEN: ${{ secrets.ASTRO_DB_APP_TOKEN }}
       PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+      HOSTNAME: ${{ secrets.HOSTNAME }}
     permissions:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository

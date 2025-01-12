@@ -21,6 +21,7 @@ export const server = {
 	}),
 	getPasskey: defineAction({
 		handler: async () => {
+			console.log("hi")
 			const passkey = await kv.get(["passkey"]);
 			return passkey;
 		},

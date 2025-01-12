@@ -7,6 +7,7 @@ import type {
 	CredentialDeviceType,
 	Base64URLString,
 } from "@simplewebauthn/server";
+import "@std/dotenv/load";
 /**
  * Human-readable title for your website
  */
@@ -15,7 +16,7 @@ const rpName = "SimpleWebAuthn Example";
  * A unique identifier for your website. 'localhost' is okay for
  * local dev
  */
-export const rpID = "buildbox.tailfe3ae2.ts.net";
+export const rpID = Deno.env.get("HOSTNAME");
 /**
  * The URL at which registrations and authentications should occur.
  * 'http://localhost' and 'http://localhost:PORT' are also valid.
